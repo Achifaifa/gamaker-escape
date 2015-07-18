@@ -8,7 +8,7 @@ ctx.font="15px sans-serif";
 
 var last_click="none";
 var current_frame="escaleratop";
-var statusd={"bajobrlight":0};
+var statusd={"bajobrlight":0, "flashlight":0};
 processed=0
 
 function menu(){
@@ -64,6 +64,223 @@ function lope(ev){
       writemessage("")
       processed=1;
     }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="escaleratop";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>10 && last_click[0]<450 && last_click[1]>10 && last_click[1]<450 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajol";
+      var imagename=current_frame;
+      console.log("Clicked on bajol, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "estudio":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajol";
+      var imagename=current_frame;
+      console.log("Clicked back "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "bajol":
+    if(last_click[0]>341 && last_click[0]<603 && last_click[1]>37 && last_click[1]<139 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajol";
+      var imagename=current_frame;
+      console.log("Clicked trash, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("More junk")
+      processed=1;
+    }
+    if(last_click[0]>43 && last_click[0]<440 && last_click[1]>188 && last_click[1]<516 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="estudio";
+      var imagename=current_frame;
+      console.log("Clicked study, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>504 && last_click[0]<534 && last_click[1]>175 && last_click[1]<481 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bano";
+      var imagename=current_frame+statusd.flashlight;
+      console.log("Clicked wc, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      if (statusd.flashlight==0){writemessage("I can't see shit in here")}
+      else {writemessage("")}
+      processed=1;
+    }
+    if(last_click[0]>636 && last_click[0]<736 && last_click[1]>175 && last_click[1]<531 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pasillo";
+      var imagename=current_frame;
+      console.log("Clicked hallway, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>750 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajor";
+      var imagename=current_frame;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "pasillo":
+    if(last_click[0]>103 && last_click[0]<234 && last_click[1]>60 && last_click[1]<500 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="lavabo";
+      var imagename=current_frame;
+      console.log("Clicked on toilet, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>291 && last_click[0]<394 && last_click[1]>183 && last_click[1]<500 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="puerta";
+      var imagename=current_frame;
+      console.log("Clicked on door, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajol";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>297 && last_click[0]<489 && last_click[1]>31 && last_click[1]<128 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="desvan";
+      var imagename=current_frame;
+      console.log("Clicked up, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "desvan":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pasillo";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "lavabo":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pasillo";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "taquillas":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajor";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "bajor":
+    if(last_click[0]>420 && last_click[0]<679 && last_click[1]>185 && last_click[1]<417 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="taquillas";
+      var imagename=current_frame;
+      console.log("Clicked in lockers, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>732 && last_click[0]<800 && last_click[1]>184 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajobr";
+      var imagename=current_frame+statusd.bajobrlight;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<50 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajol";
+      var imagename=current_frame;
+      console.log("Clicked left, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "bano":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>400 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajol";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>311 && last_click[0]<386 && last_click[1]>59 && last_click[1]<103 && processed==0 && statusd.flashlight==1){
+      ctx.clearRect(0,0,800,600);
+      current_frame="agujero";
+      var imagename=current_frame;
+      console.log("Clicked in hole, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("I bet there's something there. Probably spiders.")
+      processed=1;
+    }
+    break;
+
+    case "agujero":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>400 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bano";
+      var imagename=current_frame+statusd.flashlight;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
     break;
 
     case "bajobr":
@@ -92,6 +309,57 @@ function lope(ev){
       current_frame="bajobesc";
       var imagename=current_frame;
       console.log("Clicked stairs "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>50 && last_click[0]<250 && last_click[1]>145 && last_click[1]<431 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajomesa";
+      var imagename=current_frame;
+      console.log("Clicked table, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("It's just a table")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<50 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajobl";
+      var imagename=current_frame;
+      console.log("Clicked left, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajor";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "puerta":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pasillo";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "bajomesa":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>400 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajobr";
+      var imagename=current_frame+statusd.bajobrlight;
+      console.log("Clicked back "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
       processed=1;
