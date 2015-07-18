@@ -8,7 +8,8 @@ ctx.font="15px sans-serif";
 
 var last_click="none";
 var current_frame="escaleratop";
-var statusd={"bajobrlight":0, "flashlight":0};
+var statusd={"bajobrlight":0};
+var inventory={"flashlight":0}
 processed=0
 
 function menu(){
@@ -16,7 +17,6 @@ function menu(){
   ctx.clearRect(0,0,800,600);
   ctx.drawImage(escaleratop,0,30);
   c.addEventListener("mousedown",lope,false)
-
 }
 
 function lope(ev){
@@ -75,7 +75,7 @@ function lope(ev){
     }
     if(last_click[0]>10 && last_click[0]<450 && last_click[1]>10 && last_click[1]<450 && processed==0){
       ctx.clearRect(0,0,800,600);
-      current_frame="bajol";
+      current_frame="bajoc";
       var imagename=current_frame;
       console.log("Clicked on bajol, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
@@ -97,6 +97,15 @@ function lope(ev){
     break;
 
     case "bajol":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajobl";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
     if(last_click[0]>341 && last_click[0]<603 && last_click[1]>37 && last_click[1]<139 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="bajol";
@@ -118,10 +127,10 @@ function lope(ev){
     if(last_click[0]>504 && last_click[0]<534 && last_click[1]>175 && last_click[1]<481 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="bano";
-      var imagename=current_frame+statusd.flashlight;
+      var imagename=current_frame+inventory.flashlight;
       console.log("Clicked wc, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
-      if (statusd.flashlight==0){writemessage("I can't see shit in here")}
+      if (inventory.flashlight==0){writemessage("I can't see shit in here")}
       else {writemessage("")}
       processed=1;
     }
@@ -136,9 +145,39 @@ function lope(ev){
     }
     if(last_click[0]>750 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
       ctx.clearRect(0,0,800,600);
+      current_frame="bajoc";
+      var imagename=current_frame;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "bajoc":
+    if(last_click[0]>750 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
       current_frame="bajor";
       var imagename=current_frame;
       console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<50 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajol";
+      var imagename=current_frame;
+      console.log("Clicked left, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajobl";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
       processed=1;
@@ -241,7 +280,7 @@ function lope(ev){
     }
     if(last_click[0]>0 && last_click[0]<50 && last_click[1]>0 && last_click[1]<560 && processed==0){
       ctx.clearRect(0,0,800,600);
-      current_frame="bajol";
+      current_frame="bajoc";
       var imagename=current_frame;
       console.log("Clicked left, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
@@ -260,7 +299,7 @@ function lope(ev){
       writemessage("")
       processed=1;
     }
-    if(last_click[0]>311 && last_click[0]<386 && last_click[1]>59 && last_click[1]<103 && processed==0 && statusd.flashlight==1){
+    if(last_click[0]>311 && last_click[0]<386 && last_click[1]>59 && last_click[1]<103 && processed==0 && inventory.flashlight==1){
       ctx.clearRect(0,0,800,600);
       current_frame="agujero";
       var imagename=current_frame;
@@ -275,7 +314,7 @@ function lope(ev){
     if(last_click[0]>0 && last_click[0]<800 && last_click[1]>400 && last_click[1]<565 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="bano";
-      var imagename=current_frame+statusd.flashlight;
+      var imagename=current_frame+inventory.flashlight;
       console.log("Clicked back, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
