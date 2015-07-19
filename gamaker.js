@@ -174,7 +174,7 @@ function lope(ev){
     }
     if(last_click[0]>311 && last_click[0]<439 && last_click[1]>242 && last_click[1]<295 && processed==0){
       ctx.clearRect(0,0,800,600);
-      current_frame="shelvesbl";
+      current_frame="shelvesbr";
       var imagename=current_frame;
       console.log("Clicked shelves (BR), loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
@@ -1270,6 +1270,7 @@ function lope(ev){
       if (inventory.smallkey==1 && statusd.floppyopen==0){
         statusd.floppyopen=1
         inventory.allenkey=1
+        inventory.smallkey=0
         writemessage ("dah dah dah daaaaaaah")
       }
       else if (inventory.smallkey==0){
@@ -1475,6 +1476,14 @@ function updateMousePosition(ev) {
 
 function writeinventory(){
 
+  invstring=""
+  if (inventory.flashlight==1){invstring+="Flashlight"}
+  if (inventory.lockpick==1){invstring+=" Pick"}
+  if (inventory.ttool==1){invstring+=" T. tool"}
+  if (inventory.smallkey==1){invstring+=" Key"}
+  if (inventory.allenkey==1){invstring+=" Allen k."}
+
+  ctx.fillText("INVENTORY: "+invstring,400,585)
   
 }
 
