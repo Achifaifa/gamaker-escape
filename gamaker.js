@@ -7,7 +7,7 @@ ctx.fillStyle="white";
 ctx.font="15px sans-serif";
 
 var last_click="none";
-var current_frame="escaleratop";
+var current_frame="menu";
 var statusd={"bajobrlight":0};
 var inventory={"flashlight":0}
 processed=0
@@ -15,7 +15,7 @@ processed=0
 function menu(){
 
   ctx.clearRect(0,0,800,600);
-  ctx.drawImage(escaleratop,0,30);
+  ctx.drawImage(menu,0,30);
   c.addEventListener("mousedown",lope,false)
 }
 
@@ -24,6 +24,19 @@ function lope(ev){
   processed=0;
   updateMousePosition(ev);
   switch(current_frame){
+
+    case "menu":
+    if(last_click[0]>380 && last_click[0]<635 && last_click[1]>80 && last_click[1]<185 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="escaleratop";
+      var imagename=current_frame;
+      console.log("Clicked start, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
     case "escaleratop":
     if(last_click[0]>252 && last_click[0]<422 && last_click[1]>210 && last_click[1]<494 && processed==0){
       ctx.clearRect(0,0,800,600);
@@ -515,6 +528,48 @@ items=[
 "./images/bajomesa.png",  
 "./images/cerrojo00.png",  
 "./images/escaleratop.png",  
+"./images/menu.png",
+"./images/books.png",
+"./images/cabeza.png",
+"./images/electro0.png",
+"./images/electro1.png",
+"./images/floppy0.png",
+"./images/floppy1.png",
+"./images/glassback.png",
+"./images/guitar.png",
+"./images/locc0.png",
+"./images/locc1.png",
+"./images/loccer.png",
+"./images/loccris.png",
+"./images/locf.png",
+"./images/locl.png",
+"./images/locpuerta0.png",
+"./images/locpuerta1.png",
+"./images/locr0.png",
+"./images/locr1.png",
+"./images/mesa3d.png",
+"./images/mochila.png",
+"./images/pcpapeles.png",
+"./images/pcs0.png",
+"./images/pcs1.png",
+"./images/pcs2.png",
+"./images/pcs3.png",
+"./images/pcs4.png",
+"./images/powertools.png",
+"./images/prusa.png",
+"./images/shelvesbl.png",
+"./images/shelvesbr.png",
+"./images/shelvestl.png",
+"./images/shelvestr.png",
+"./images/storagea.png",
+"./images/storageb.png",
+"./images/tarjetab.png",
+"./images/tarjetaf.png",
+"./images/tarjetasuelo.png",
+"./images/tripas.png",
+"./images/ventana.png",
+"./images/wake1.png",
+"./images/wake2.png",
 "./images/pasillo.png"
 ];
 
