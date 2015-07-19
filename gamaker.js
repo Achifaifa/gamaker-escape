@@ -151,6 +151,60 @@ function lope(ev){
     }
     break;
 
+    case "storagea":
+    if(last_click[0]>700 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locl";
+      var imagename=current_frame;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>447 && last_click[0]<600 && last_click[1]>48 && last_click[1]<241 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="storageb";
+      var imagename=current_frame;
+      console.log("Clicked front, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "storageb":
+    if(last_click[0]>750 && last_click[0]<800 && last_click[1]>0 && last_click[1]<200 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="glassback";
+      var imagename=current_frame;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("This is not helping")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="storagea";
+      var imagename=current_frame;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "glassback":
+    if(last_click[0]>700 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="storageb";
+      var imagename=current_frame;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
     case "locc":
     if(last_click[0]>0 && last_click[0]<50 && last_click[1]>0 && last_click[1]<360 && processed==0){
       ctx.clearRect(0,0,800,600);
@@ -206,6 +260,43 @@ function lope(ev){
       writemessage("")
       processed=1;
     }
+    if(last_click[0]>0 && last_click[0]<400 && last_click[1]>100 && last_click[1]<552 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="mochila";
+      var imagename=current_frame;
+      console.log("Clicked on backpack, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("That's mine")
+      processed=1;
+    }
+    break;
+
+    case "mochila":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locc";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked on pcs, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>56 && last_click[0]<600 && last_click[1]>233 && last_click[1]<453 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="mochila";
+      var imagename=current_frame;
+      console.log("Clicked on pocket, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      if (inventory.flashlight==0){
+        writemessage("I'll take my flashlight")
+        inventory.flashlight=1
+      }
+      else{
+        writemessage("I already got what I needed")
+      }
+      
+      processed=1;
+    }
     break;
 
     case "guitar":
@@ -213,6 +304,120 @@ function lope(ev){
       ctx.clearRect(0,0,800,600);
       current_frame="locc";
       var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "mesa3d":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locr";
+      var imagename=current_frame+statusd.locrdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>196 && last_click[0]<232 && last_click[1]>300 && last_click[1]<400 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="mesa3d";
+      var imagename=current_frame;
+      console.log("Clicked on spray, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("FSSSHHHH. Now I look fabulous!")
+      processed=1;
+    }
+    if(last_click[0]>529 && last_click[0]<760 && last_click[1]>268 && last_click[1]<417 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="prusa";
+      var imagename=current_frame;
+      console.log("Clicked on printer, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("What a mess")
+      processed=1;
+    }
+    if(last_click[0]>750 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pcs";
+      var imagename=current_frame+statusd.pcsdrawer;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "pcs":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locc";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<50 && last_click[1]>0 && last_click[1]<500 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="mesa3d";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "prusa":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="mesa3d";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>120 && last_click[0]<329 && last_click[1]>224 && last_click[1]<360 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tripas";
+      var imagename=current_frame;
+      console.log("Clicked guts, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("That's not working anytime soon")
+      processed=1;
+    }
+    if(last_click[0]>361 && last_click[0]<574 && last_click[1]>193 && last_click[1]<372 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="cabeza";
+      var imagename=current_frame;
+      console.log("Clicked head, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("Neat")
+      processed=1;
+    }
+    break;
+
+    case "cabeza":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="prusa";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "tripas":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="prusa";
+      var imagename=current_frame;
       console.log("Clicked back, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
@@ -248,11 +453,19 @@ function lope(ev){
         console.log("Clicked door, loading "+imagename);
         ctx.drawImage(eval(imagename),0,30);
       }
-      else {
+      else if (inventory.flashlight==1){
         current_frame="storagea"
         var imagename=current_frame;
         console.log("Clicked door, loading "+imagename);
         ctx.drawImage(eval(imagename),0,30);
+        writemessage("")
+      }
+      else {
+        current_frame="locr";
+        var imagename=current_frame+statusd.locrdoor;
+        console.log("Clicked door, loading "+imagename);
+        ctx.drawImage(eval(imagename),0,30);
+        writemessage("Not going in there without light")
       }
       processed=1;
     }
@@ -765,10 +978,10 @@ items=[
 "./images/electro1.png",
 "./images/floppy0.png",
 "./images/floppy1.png",
-"./images/glassback.png",
+"./images/glassback.png",//
 "./images/guitar.png",
-"./images/locc0.png",
-"./images/locc1.png",
+"./images/locc0.png",//
+"./images/locc1.png",//
 "./images/loccer.png",
 "./images/loccris.png",
 "./images/locf.png",
@@ -777,27 +990,27 @@ items=[
 "./images/locpuerta1.png",
 "./images/locr0.png",
 "./images/locr1.png",
-"./images/mesa3d.png",
-"./images/mochila.png",
+"./images/mesa3d.png",//
+"./images/mochila.png",//
 "./images/pcpapeles.png",
 "./images/pcs0.png",
 "./images/pcs1.png",
 "./images/pcs2.png",
 "./images/pcs3.png",
 "./images/pcs4.png",
-"./images/powertools.png",
+"./images/powertools.png",//
 "./images/prusa.png",
-"./images/shelvesbl.png",
-"./images/shelvesbr.png",
-"./images/shelvestl.png",
-"./images/shelvestr.png",
-"./images/storagea.png",
-"./images/storageb.png",
+"./images/shelvesbl.png",//
+"./images/shelvesbr.png",//
+"./images/shelvestl.png",//
+"./images/shelvestr.png",//
+"./images/storagea.png",//
+"./images/storageb.png",//
 "./images/tarjetab.png",
 "./images/tarjetaf.png",
 "./images/tarjetasuelo.png",
 "./images/tripas.png",
-"./images/ventana.png",
+"./images/ventana.png",//
 "./images/wake1.png",
 "./images/wake2.png",
 "./images/pasillo.png"//
