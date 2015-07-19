@@ -1311,15 +1311,6 @@ function lope(ev){
     break;
 
     case "puerta":
-    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
-      ctx.clearRect(0,0,800,600);
-      current_frame="pasillo";
-      var imagename=current_frame;
-      console.log("Clicked back, loading "+imagename);
-      ctx.drawImage(eval(imagename),0,30);
-      writemessage("")
-      processed=1;
-    }
     if(last_click[0]>313 && last_click[0]<370 && last_click[1]>480 && last_click[1]<519 && processed==0){
       ctx.clearRect(0,0,800,600);
       if (inventory.flashlight==0){
@@ -1335,6 +1326,15 @@ function lope(ev){
         writemessage("The handle is missing!")
       }
 
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pasillo";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
       processed=1;
@@ -1476,15 +1476,22 @@ function updateMousePosition(ev) {
 
 function writeinventory(){
 
+  inventorya=[]
   invstring=""
-  if (inventory.flashlight==1){invstring+="Flashlight"}
-  if (inventory.lockpick==1){invstring+=" Pick"}
-  if (inventory.ttool==1){invstring+=" T. tool"}
-  if (inventory.smallkey==1){invstring+=" Key"}
-  if (inventory.allenkey==1){invstring+=" Allen k."}
-
+  if (inventory.flashlight==1){inventorya.push("Flashlight")}
+  if (inventory.lockpick==1){inventorya.push("Pick")}
+  if (inventory.ttool==1){inventorya.push("T. tool")}
+  if (inventory.smallkey==1){inventorya.push("Key")}
+  if (inventory.allenkey==1){inventorya.push("Allen k.")}
+  for (i=0; i<inventorya.length; i++){
+    if (i==inventorya.length-1){
+      invstring+=inventorya[i]
+    }
+    else{
+      invstring+=(inventorya[i]+", ")
+    }
   ctx.fillText("INVENTORY: "+invstring,400,585)
-  
+  }
 }
 
 function writemessage(string){
