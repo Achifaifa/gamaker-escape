@@ -8,8 +8,11 @@ ctx.font="15px sans-serif";
 
 var last_click="none";
 var current_frame="menu";
-var statusd={"bajobrlight":0, "loccdoor":0, "locrdoor":0, "electrodrawer":0, "pcsdrawer":0};
-var inventory={"flashlight":0}
+var statusd={
+  "bajobrlight":0, "loccdoor":0, "locrdoor":0, "electrodrawer":0, "pcsdrawer":0, 
+  "loclock": 0, "floppyopen":0, "cerrojokey":0, "cerrojoopen":0
+};
+var inventory={"flashlight":0, "lockpick":0, "ttool":0, "smallkey":0, "allenkey":0}
 processed=0
 
 function menu(){
@@ -81,6 +84,35 @@ function lope(ev){
       console.log("Clicked window, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("Not through HERE")
+      processed=1;
+    }
+    break;
+
+    case "electro":
+    if(last_click[0]>259 && last_click[0]<480 && last_click[1]>398 && last_click[1]<538 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="electro";
+      if (statusd.electrodrawer==0){statusd.electrodrawer=1}
+      else {
+        if (inventory.lockpick==0) {
+          inventory.lockpick=1
+          writemessage("A lockpick! Nice")
+        }
+        else {statusd.electrodrawer=0}}
+      var imagename=current_frame+statusd.electrodrawer;
+      console.log("Clicked drawer, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locc";
+      statusd.electrodrawer=0
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
       processed=1;
     }
     break;
@@ -260,13 +292,230 @@ function lope(ev){
       writemessage("")
       processed=1;
     }
-    if(last_click[0]>0 && last_click[0]<400 && last_click[1]>100 && last_click[1]<552 && processed==0){
+    if(last_click[0]>0 && last_click[0]<100 && last_click[1]>100 && last_click[1]<552 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="mochila";
       var imagename=current_frame;
       console.log("Clicked on backpack, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("That's mine")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="escaleratop";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "ventana":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locl";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "powertools":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locl";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "locpuerta":
+    if(last_click[0]>259 && last_click[0]<311 && last_click[1]>218 && last_click[1]<283 && processed==0 && statusd.loclock==0){
+      ctx.clearRect(0,0,800,600);
+      if (statusd.loclock==0){
+        current_frame="loccer";
+        var imagename=current_frame;
+        console.log("Clicked on lock, loading "+imagename);
+        ctx.drawImage(eval(imagename),0,30);
+        writemessage("Locked!")
+      }
+      else {writemessage("I remember opening this")}
+      processed=1;
+    }
+    if(last_click[0]>240 && last_click[0]<700 && last_click[1]>50 && last_click[1]<500 && processed==0 && statusd.loccdoor==0){
+      ctx.clearRect(0,0,800,600);
+      if (statusd.loclock==1){statusd.loccdoor=1}
+      current_frame="locpuerta";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked on door, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      if (statusd.loclock==0){writemessage("It's locked!")}
+      processed=1;
+    }
+    if(last_click[0]>577 && last_click[0]<800 && last_click[1]>0 && last_click[1]<500 && processed==0 && statusd.loccdoor==1){
+      ctx.clearRect(0,0,800,600);
+      statusd.loccdoor=0
+      current_frame="locpuerta";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked on door, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locc";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>262 && last_click[0]<300 && last_click[1]>470 && last_click[1]<560 && processed==0 && statusd.loccdoor==1){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tarjetasuelo";
+      var imagename=current_frame;
+      console.log("Clicked card, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "tarjetasuelo":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locpuerta";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>201 && last_click[0]<389 && last_click[1]>203 && last_click[1]<424 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tarjetaf";
+      var imagename=current_frame;
+      console.log("Clicked card, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "tarjetaf":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locpuerta";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>700 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tarjetab";
+      var imagename=current_frame;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<100 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tarjetab";
+      var imagename=current_frame;
+      console.log("Clicked left, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>100 && last_click[0]<650 && last_click[1]>86 && last_click[1]<447 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tarjetaf";
+      var imagename=current_frame;
+      console.log("Clicked left, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("Cute")
+      processed=1;
+    }
+    break;
+
+    case "tarjetab":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locpuerta";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>700 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tarjetaf";
+      var imagename=current_frame;
+      console.log("Clicked right, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<100 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tarjetaf";
+      var imagename=current_frame;
+      console.log("Clicked left, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>166 && last_click[0]<324 && last_click[1]>82 && last_click[1]<153 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="tarjetab";
+      var imagename=current_frame;
+      console.log("Clicked number, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("I bet it's a code for something")
+      processed=1;
+    }
+    break;
+    
+    case "loccer":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locpuerta";
+      var imagename=current_frame+statusd.loccdoor;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>237 && last_click[0]<297 && last_click[1]>259 && last_click[1]<317 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="loccer";
+      var imagename=current_frame;
+      console.log("Clicked on lock, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      if (inventory.lockpick==1 && inventory.ttool==1 && statusd.loclock==0){
+        statusd.loclock=1
+        writemessage("Boom, open!")
+      }
+      else if (statusd.loclock==1){
+        writemessage("I've already opened it")
+      }
+      else if (inventory.lockpick!=inventory.ttool){
+        writemessage("I need something else")
+      }
+      else if (inventory.lockpick==0 && inventory.ttool==0){
+        writemessage("I don't have the key")
+      }
+      
       processed=1;
     }
     break;
@@ -351,9 +600,50 @@ function lope(ev){
     break;
 
     case "pcs":
+    if(last_click[0]>361 && last_click[0]<518 && last_click[1]>344 && last_click[1]<403 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pcs";
+      statusd.pcsdrawer=1
+      var imagename=current_frame+statusd.pcsdrawer;
+      console.log("Clicked on drawer, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("Full of pens and stuff")
+      processed=1;
+    }
+    if(last_click[0]>554 && last_click[0]<683 && last_click[1]>388 && last_click[1]<449 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pcs";
+      statusd.pcsdrawer=2
+      var imagename=current_frame+statusd.pcsdrawer;
+      console.log("Clicked on drawer, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("Just general computer stuff")
+      processed=1;
+    }
+    if(last_click[0]>544 && last_click[0]<679 && last_click[1]>435 && last_click[1]<498 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pcs";
+      statusd.pcsdrawer=3
+      var imagename=current_frame+statusd.pcsdrawer;
+      console.log("Clicked on drawer, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>541 && last_click[0]<671 && last_click[1]>482 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pcs";
+      statusd.pcsdrawer=4
+      var imagename=current_frame+statusd.pcsdrawer;
+      console.log("Clicked on drawer, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("This one is empty")
+      processed=1;
+    }
     if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="locc";
+      statusd.pcsdrawer=0
       var imagename=current_frame+statusd.loccdoor;
       console.log("Clicked back, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
@@ -363,7 +653,31 @@ function lope(ev){
     if(last_click[0]>0 && last_click[0]<50 && last_click[1]>0 && last_click[1]<500 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="mesa3d";
+      statusd.pcsdrawer=0
       var imagename=current_frame;
+      console.log("Clicked left, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>50 && last_click[0]<141 && last_click[1]>203 && last_click[1]<275 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pcpapeles";
+      statusd.pcsdrawer=0
+      var imagename=current_frame;
+      console.log("Clicked on papers, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("Uh...")
+      processed=1;
+    }
+    break;
+
+    case "pcpapeles":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="pcs";
+      statusd.pcsdrawer=0
+      var imagename=current_frame+statusd.pcsdrawer;
       console.log("Clicked back, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
@@ -534,6 +848,93 @@ function lope(ev){
       current_frame="bajoc";
       var imagename=current_frame;
       console.log("Clicked on bajol, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "shelvesbl":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locf";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "shelvestr":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locf";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>521 && last_click[0]<740 && last_click[1]>217 && last_click[1]<355 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="books";
+      var imagename=current_frame;
+      console.log("Clicked books, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "books":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="shelvestr";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>241 && last_click[0]<358 && last_click[1]>93 && last_click[1]<500 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="books";
+      var imagename=current_frame;
+      console.log("Clicked book, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("Not with this headache")
+      processed=1;
+    }
+    if(last_click[0]>368 && last_click[0]<800 && last_click[1]>40 && last_click[1]<500 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="books";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("Mostly catalogues")
+      processed=1;
+    }
+    break;
+
+    case "shelvestl":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locf";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "shelvesbr":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="locf";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
       processed=1;
@@ -767,7 +1168,23 @@ function lope(ev){
     break;
 
     case "agujero":
-    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>400 && last_click[1]<565 && processed==0){
+    if(last_click[0]>266 && last_click[0]<594 && last_click[1]>247 && last_click[1]<419 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="agujero";
+      if (inventory.smallkey==0){
+        inventory.smallkey=1
+        writemessage("A small key! And spiders!")
+      }
+      else {
+        writemessage("Not putting my hand there again")
+      }
+      var imagename=current_frame;
+      console.log("Clicked on hole, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="bano";
       var imagename=current_frame+inventory.flashlight;
@@ -788,6 +1205,15 @@ function lope(ev){
       console.log("Clicked bajobr lights, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>483 && last_click[0]<511 && last_click[1]>292 && last_click[1]<351 && processed==0 && inventory.flashlight==1){
+      ctx.clearRect(0,0,800,600);
+      current_frame="floppy";
+      var imagename=current_frame+statusd.floppyopen;
+      console.log("Clicked creepy place "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      if (statusd.floppyopen==0){writemessage("What")}
       processed=1;
     }
     if(last_click[0]>284 && last_click[0]<563 && last_click[1]>148 && last_click[1]<422 && processed==0){
@@ -837,12 +1263,110 @@ function lope(ev){
     }
     break;
 
+    case "floppy":
+    if(last_click[0]>413 && last_click[0]<464 && last_click[1]>394 && last_click[1]<444 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="floppy";
+      if (inventory.smallkey==1 && statusd.floppyopen==0){
+        statusd.floppyopen=1
+        inventory.allenkey=1
+        writemessage ("dah dah dah daaaaaaah")
+      }
+      else if (inventory.smallkey==0){
+        writemessage("It's locked")
+      }
+      else if (statusd.floppyopen==1){
+        writemessage("It's already open")
+      }
+      var imagename=current_frame+statusd.floppyopen;
+      console.log("Clicked floppies place "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      processed=1;
+    }
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>0 && last_click[1]<100 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="bajobr";
+      var imagename=current_frame+statusd.bajobrlight;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>252 && last_click[0]<402 && last_click[1]>238 && last_click[1]<326 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="floppy";
+      if (statusd.floppyopen==0){
+        writemessage("How on earth...")
+      }
+      else {
+        writemessage("I won't ask")
+      }
+      var imagename=current_frame+statusd.floppyopen;
+      console.log("Clicked key, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
     case "puerta":
     if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="pasillo";
       var imagename=current_frame;
       console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>313 && last_click[0]<370 && last_click[1]>480 && last_click[1]<519 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      if (inventory.flashlight==0){
+        current_frame="puerta";
+        var imagename=current_frame;
+        console.log("Clicked on lock, loading "+imagename);
+        writemessage("I can't see a thing")
+      }
+      else{
+        current_frame="cerrojo";
+        var imagename=current_frame+statusd.cerrojokey+statusd.cerrojoopen;
+        console.log("Clicked on lock, loading "+imagename);
+        writemessage("The handle is missing!")
+      }
+
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    break;
+
+    case "cerrojo":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<565 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="puerta";
+      var imagename=current_frame;
+      console.log("Clicked back, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
+    if(last_click[0]>411 && last_click[0]<443 && last_click[1]>295 && last_click[1]<331 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="cerrojo";
+      if (statusd.cerrojokey==0 && inventory.allenkey==1){
+        statusd.cerrojokey=1
+        inventory.allenkey=0
+        writemessage("It fits perfectly")
+      }
+      else if (statusd.cerrojokey==1){
+        statusd.cerrojoopen=1
+        writemessage("FIN")
+      }
+      else if (inventory.allenkey==0){
+        writemessage("I have nothing to pull the bolt")
+      }
+      var imagename=current_frame+statusd.cerrojoopen+statusd.cerrojokey;
+      console.log("Clicked lock, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
       writemessage("")
       processed=1;
@@ -922,6 +1446,19 @@ function lope(ev){
       writemessage("")
       processed=1;
     }
+    if(last_click[0]>561 && last_click[0]<703 && last_click[1]>244 && last_click[1]<336 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="escaleratrastos";
+      if (inventory.ttool==0){
+        inventory.ttool=1
+        writemessage("A wiper bristle! I need that")
+      }
+      var imagename=current_frame;
+      console.log("Clicked back "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
     break;
 
   }
@@ -973,43 +1510,43 @@ items=[
 "./images/escaleratop.png",//  
 "./images/menu.png",//
 "./images/books.png",
-"./images/cabeza.png",
-"./images/electro0.png",
-"./images/electro1.png",
-"./images/floppy0.png",
-"./images/floppy1.png",
+"./images/cabeza.png",//
+"./images/electro0.png",//
+"./images/electro1.png",//
+"./images/floppy0.png",//
+"./images/floppy1.png",//
 "./images/glassback.png",//
 "./images/guitar.png",
 "./images/locc0.png",//
 "./images/locc1.png",//
-"./images/loccer.png",
-"./images/loccris.png",
-"./images/locf.png",
-"./images/locl.png",
-"./images/locpuerta0.png",
-"./images/locpuerta1.png",
-"./images/locr0.png",
-"./images/locr1.png",
+"./images/loccer.png",//
+"./images/loccris.png",//
+"./images/locf.png",//
+"./images/locl.png",//
+"./images/locpuerta0.png",//
+"./images/locpuerta1.png",//
+"./images/locr0.png",//
+"./images/locr1.png",//
 "./images/mesa3d.png",//
 "./images/mochila.png",//
-"./images/pcpapeles.png",
-"./images/pcs0.png",
-"./images/pcs1.png",
-"./images/pcs2.png",
-"./images/pcs3.png",
-"./images/pcs4.png",
+"./images/pcpapeles.png",//
+"./images/pcs0.png",//
+"./images/pcs1.png",//
+"./images/pcs2.png",//
+"./images/pcs3.png",//
+"./images/pcs4.png",//
 "./images/powertools.png",//
-"./images/prusa.png",
+"./images/prusa.png",//
 "./images/shelvesbl.png",//
 "./images/shelvesbr.png",//
 "./images/shelvestl.png",//
 "./images/shelvestr.png",//
 "./images/storagea.png",//
 "./images/storageb.png",//
-"./images/tarjetab.png",
-"./images/tarjetaf.png",
-"./images/tarjetasuelo.png",
-"./images/tripas.png",
+"./images/tarjetab.png",//
+"./images/tarjetaf.png",//
+"./images/tarjetasuelo.png",//
+"./images/tripas.png",//
 "./images/ventana.png",//
 "./images/wake1.png",
 "./images/wake2.png",
