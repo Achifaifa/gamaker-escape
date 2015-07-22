@@ -31,11 +31,35 @@ function lope(ev){
     case "menu":
     if(last_click[0]>380 && last_click[0]<635 && last_click[1]>80 && last_click[1]<185 && processed==0){
       ctx.clearRect(0,0,800,600);
+      current_frame="wake1";
+      var imagename=current_frame;
+      console.log("Clicked start, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("Huh?")
+      processed=1;
+    }
+    break;
+
+    case "wake1":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="wake2";
+      var imagename=current_frame;
+      console.log("Clicked start, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("What happened?")
+      processed=1;
+    }
+    break;
+
+    case "wake2":
+    if(last_click[0]>0 && last_click[0]<800 && last_click[1]>0 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
       current_frame="locl";
       var imagename=current_frame;
       console.log("Clicked start, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
-      writemessage("")
+      writemessage("I passed out? I need to get out and buy a snack")
       processed=1;
     }
     break;
