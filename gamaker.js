@@ -1385,7 +1385,7 @@ function lope(ev){
       }
       else if (statusd.cerrojokey==1){
         statusd.cerrojoopen=1
-        writemessage("FIN")
+        current_frame="end";
       }
       else if (inventory.allenkey==0){
         writemessage("I have nothing to pull the bolt")
@@ -1393,7 +1393,7 @@ function lope(ev){
       var imagename=current_frame+statusd.cerrojoopen+statusd.cerrojokey;
       console.log("Clicked lock, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
-      writemessage("")
+      writemessage("Yes! Now where is the shop?")
       processed=1;
     }
     break;
@@ -1588,9 +1588,10 @@ items=[
 "./images/tarjetasuelo.png",//
 "./images/tripas.png",//
 "./images/ventana.png",//
-"./images/wake1.png",
-"./images/wake2.png",
-"./images/pasillo.png"//
+"./images/wake1.png",//
+"./images/wake2.png",//
+"./images/pasillo.png",//
+"./images/end11.png"//
 ];
 
 // Loader specification
@@ -1613,6 +1614,7 @@ function loader(items, allDone) {
     // If not, draw loading bar+message
     else {
       ctx.clearRect(0,0,800,600);
+      ctx.fillText("LOADING",x-35,y-70)
       ctx.beginPath();
       ctx.arc(x,y,50,startrad,startrad+itemincrement*(items.length-count),false);
       ctx.stroke();
