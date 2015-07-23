@@ -573,6 +573,15 @@ function lope(ev){
     break;
 
     case "guitar":
+    if(last_click[0]>415 && last_click[0]<800 && last_click[1]>303 && last_click[1]<560 && processed==0){
+      ctx.clearRect(0,0,800,600);
+      current_frame="electro";
+      var imagename=current_frame+statusd.electrodrawer;
+      console.log("Clicked electro, loading "+imagename);
+      ctx.drawImage(eval(imagename),0,30);
+      writemessage("")
+      processed=1;
+    }
     if(last_click[0]>0 && last_click[0]<800 && last_click[1]>500 && last_click[1]<560 && processed==0){
       ctx.clearRect(0,0,800,600);
       current_frame="locc";
@@ -1386,6 +1395,7 @@ function lope(ev){
       else if (statusd.cerrojokey==1){
         statusd.cerrojoopen=1
         current_frame="end";
+        writemessage("Yes! Now where is the shop?")
       }
       else if (inventory.allenkey==0){
         writemessage("I have nothing to pull the bolt")
@@ -1393,7 +1403,7 @@ function lope(ev){
       var imagename=current_frame+statusd.cerrojoopen+statusd.cerrojokey;
       console.log("Clicked lock, loading "+imagename);
       ctx.drawImage(eval(imagename),0,30);
-      writemessage("Yes! Now where is the shop?")
+      writemessage("")
       processed=1;
     }
     break;
@@ -1529,13 +1539,13 @@ items=[
 "./images/agujero.png",//   
 "./images/bajobr1.png",//   
 "./images/bajor.png",//      
-"./images/cerrojo01.png",    
+"./images/cerrojo01.png",//    
 "./images/escaleratrastos.png",//  
 "./images/pegatinas.png",//
 "./images/bajobesc.png",//  
 "./images/bajoc.png",//     
 "./images/bano0.png",//      
-"./images/cerrojo11.png",    
+"./images/cerrojo11.png",//    
 "./images/estudio.png",//          
 "./images/puerta.png",//
 "./images/bajobl.png",//    
@@ -1546,7 +1556,7 @@ items=[
 "./images/taquillas.png",//
 "./images/bajobr0.png",//   
 "./images/bajomesa.png",//  
-"./images/cerrojo00.png",  
+"./images/cerrojo00.png",//  
 "./images/escaleratop.png",//  
 "./images/menu.png",//
 "./images/books.png",
@@ -1614,11 +1624,11 @@ function loader(items, allDone) {
     // If not, draw loading bar+message
     else {
       ctx.clearRect(0,0,800,600);
-      ctx.fillText("LOADING",x-35,y-70)
+      ctx.fillText("LOADING",x-37,y-70)
       ctx.beginPath();
       ctx.arc(x,y,50,startrad,startrad+itemincrement*(items.length-count),false);
       ctx.stroke();
-      ctx.fillText((items.length-count)+"/"+items.length,x-20,y+5);
+      ctx.fillText((items.length-count)+"/"+items.length,x-25,y+5);
     }};
   // Actual loading loop
   for (var i=0; i<items.length; i++) {
